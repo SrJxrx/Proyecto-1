@@ -18,7 +18,7 @@ def solicitar_reglas():
     ]
 
     valores_defecto = ["50", "50", "12", "3", "23"]
-    respuestas = easygui.multenterbox("Ingrese los parámetros iniciales:", titulo, campos, valores_defecto)
+    respuestas = easygui.multenterbox("Ingrese los parámetros iniciales:", campos, valores_defecto)
     
     if respuestas is None:
         sys.exit()
@@ -53,16 +53,49 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 loop = False
+                
             if event.type == pygame.KEYDOWN:
-                keys = pygame.key.get_pressed()
-                if keys[pygame.K_p]:
+                if event.key == pygame.K_SPACE:
                     pausa = not pausa
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                buttons = pygame.mouse.get_pressed()
+                elif event.key == pygame.K_r:
+                    M = con.generar_matriz_aleatoria(filas, columnas)
+                elif event.key == pygame.K_b:
+                    M = con.generar_matriz_vacia(filas, columnas)
+                elif event.key == pygame.K_g:
+                    datos_a_guardar = {
+                        "matriz": M,
+                        "filas": filas,
+                        "columnas": columnas,
+                        "tam_celda": tam,
+                        "reglas_b": reglas_b,
+                        "reglas_s": reglas_s
+                    }
+                    with open("partida.pkl", "wb") as f_archivo:
+                        pickle.dump(datos_a_guardar, f_archivo)
+                    print("Guardado con éxito.")
+                    
+                
+                elif event.key == pygame.K_c:
+                    try:
+                        with open("partida_automata.pkl", "rb") as f_archivo:
+                            datos_cargados = pickle.load(f_archivo)
+                        M = datos_cargados["matriz"]
+                        filas = datos_cargados["filas"]
+                        columnas = datos_cargados["columnas"]
+                        tam = datos_cargados["tam_celda"]
+                        reglas_b = datos_cargados["reglas_b"]
+                        reglas_s = datos_cargados["reglas_s"]
+                        w, h = columnas * tam, filas * tam
+                        window = pygame.display.set_mode((w, h))
+                        print("Estado cargado correctamente desde el archivo.")
+                    except FileNotFoundError:
+                        print("Error: No se encontró ningún archivo de guardado previo ('partida_automata.pkl').")
+            if pygame.mouse.get_pressed()[0]:
                 x, y = pygame.mouse.get_pos()
-                if buttons[0]:
-                    f = y // tam
-                    c = x // tam
+                c = x // tam
+                f = y // tam
+                if 0 <= f < filas and 0 <= c < columnas:
+                    # Con mutación inmediata: cambia la célula al siguiente estado lógico
                     M[f][c] = (M[f][c] + 1) % 2
                     
         window.fill((0, 0, 0))
