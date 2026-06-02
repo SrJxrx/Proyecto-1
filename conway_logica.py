@@ -28,7 +28,7 @@ def obtener_vecinos(M, f, c):
     return vecinos
 
 
-def transicion_celula(estado, vecinos):
+def transicion_celula(estado, vecinos, reglas_b, reglas_s):
     """Retorna el nuevo estado de la célula de acuerdo
     al estado de sus vecinos.
     Si estado == 0 y tiene 3 vecinos vivos --> viva
@@ -47,7 +47,7 @@ def transicion_celula(estado, vecinos):
             return 0
     return estado
 
-def transicion(M):
+def transicion(M, reglas_b, reglas_s):
     """Toma a la matriz completa y le aplica la función de
     transición a cada célula con su propio vecindario y deja
     el resultado en una matriz nueva."""
@@ -62,12 +62,3 @@ def transicion(M):
             vecinos = obtener_vecinos(M, f, c)
             nueva_matriz[f][c] = transicion_celula(estado, vecinos, reglas_b, reglas_s)
     return nueva_matriz
-    
-FILAS, COLUMNAS = 6, 6
-matriz_juego = generar_matriz_aleatoria(FILAS, COLUMNAS)
-
-b_input = input("Casos donde se producen nacimientos (dígitos de 0 a 8): ").strip()
-s_input = input("Casos donde las células sobreviven (dígitos de 0 a 8): ").strip()
-
-reglas_b = [int(d) for d in b_input if '0' <= d <= '8']
-reglas_s = [int(d) for d in s_input if '0' <= d <= '8']
