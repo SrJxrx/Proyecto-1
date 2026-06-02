@@ -2,16 +2,25 @@ from random import randint
 
 def generar_matriz_aleatoria(filas, columnas):
     """Función que retorna una matriz de las dimensiones
-    especificadas con valores enteros aleatorios de 0 o 1"""
+    especificadas con valores enteros aleatorios de 0 o 1
+    Entradas:filas, columnas
+    Salidas: matriz con valores enteros aleatorios de 0 o 1
+    Restrincciones:numeros enteros mayores a 0"""
     return [[randint(0, 1) for c in range(columnas)] for f in range(filas)]    
 
 def generar_matriz_vacia(filas, columnas):
-    """Funcion que crea una matriz a base de las dimensiones dadas, llenada con ceros."""
+    """Funcion que crea una matriz a base de las dimensiones dadas, llenada con ceros.
+    Entradas: filas, columnas
+    Salidas: matriz llenada con ceros
+    Restrincciones:numeros enteros mayores a 0"""
     return [[0 for c in range(columnas)] for f in range(filas)]
 
 def obtener_vecinos(M, f, c):
     """Función que retorna una lista con los estados de
-    los 8 vecinos de la célula en la posición f, c de M."""
+    los 8 vecinos de la célula en la posición f, c de M.
+    Entradas: Matriz, fila,columna
+    Salidas: lista con los estados de los vecinos de la celula dada
+    Restrincciones:"""
     vecinos = []
     filas = len(M)
     columnas = len(M[0])
@@ -34,7 +43,10 @@ def transicion_celula(estado, vecinos, reglas_b, reglas_s):
     Si estado == 0 y tiene 3 vecinos vivos --> viva
     Si estado == 1 y tiene menos de 2 vecinos vivos --> muere
     Si estado == 1 y tiene más de 3 vecinos vivos --> muere
-    Cualquier otra combinación, el estado sigue igual."""
+    Cualquier otra combinación, el estado sigue igual.
+    Entradas: estado, vecinos, reglas_b, reglas_s
+    Salidas: 0 o 1
+    Restrincciones:Estado debe ser binario, vecinos debe ser una lista al igual que las reglas dadas."""
     vecinos_vivos = sum(vecinos)
 
     if estado == 0:
@@ -50,7 +62,11 @@ def transicion_celula(estado, vecinos, reglas_b, reglas_s):
 def transicion(M, reglas_b, reglas_s):
     """Toma a la matriz completa y le aplica la función de
     transición a cada célula con su propio vecindario y deja
-    el resultado en una matriz nueva."""
+    el resultado en una matriz nueva.
+    Entradas: M, lista de relgas b y s
+    Salidas: Crea una matriz nueva a partir de las reglas y la matriz dada
+    Restrincciones:M debe ser una matriz y las reglas s y b deben ser listas.
+    """
     filas = len(M)
     columnas = len(M[0])
     
