@@ -9,12 +9,12 @@ import sys
 def solicitar_reglas():
     """Solicita las reglas por consola"""
     print("Configuración del Autómata Life-Like")
-    campos = [
+   campos = [
         "Cantidad de Filas:",
         "Cantidad de Columnas:",
-        "Tamaño de las Celdas (píxeles):",
-        "Regla de Nacimiento B (dígitos 0-8):",
-        "Regla de Supervivencia S (dígitos 0-8):"
+        "Tamaño de las Celdas:",
+        "Regla de Nacimiento B:",
+        "Regla de Supervivencia S:"
     ]
 
     valores_defecto = ["50", "50", "12", "3", "23"]
