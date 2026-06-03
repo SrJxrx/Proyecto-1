@@ -1,4 +1,5 @@
 from random import randint
+from copy import deepcopy
 
 def generar_matriz_aleatoria(filas, columnas):
     """Función que retorna una matriz de las dimensiones
