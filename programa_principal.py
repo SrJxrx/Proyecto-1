@@ -1,5 +1,5 @@
 from easygui import *
-import conway_gui as cg
+import conway_gui as con
 def ventana():
     bienvenida = "Bienvenido al programa principal de juegos"
     despedida = "gracias por usar este programa"
@@ -25,7 +25,7 @@ def ventana():
                 tam = int(respuestas[2])
                 reglas_b = [int(x) for x in respuestas[3]]
                 reglas_s = [int(x) for x in respuestas[4]]
-                cg.main(filas, columnas, tam, reglas_b, reglas_s)
+                con.main(filas, columnas, tam, reglas_b, reglas_s)
         elif programa == "Hormiga de Langton":
             msgbox("langton")
         else:
