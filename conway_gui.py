@@ -1,11 +1,9 @@
 import pygame
 import matrices as mat
+import conway_logica as con
 import pickle
 
  
-
-
-
 def main(filas, columnas, tam, reglas_b, reglas_s):
     pygame.init()
     clock = pygame.time.Clock()
