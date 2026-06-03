@@ -39,8 +39,7 @@ def solicitar_reglas():
         easygui.msgbox("Error: Filas, columnas y tamaño deben ser números enteros válidos.", "Error de entrada")
         return solicitar_reglas()
 
-def main():
-    filas, columnas, tam, reglas_b, reglas_s = solicitar_reglas()
+def main(filas, columnas, tam, reglas_b, reglas_s):
     reglas_b, reglas_s = solicitar_reglas()
     pygame.init()
     clock = pygame.time.Clock()
@@ -106,7 +105,7 @@ def main():
                     y = f * tam
                     pygame.draw.rect(window, (0, 255, 128), (x, y, tam, tam))
         if not pausa:
-            M = con.transicion(M)
+            M = con.transicion(M, reglas_b, reglas_s)
         pygame.display.update()
         clock.tick(10)
     pygame.quit()
