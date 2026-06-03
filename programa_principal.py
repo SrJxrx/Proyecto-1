@@ -1,5 +1,5 @@
 from easygui import *
-
+import conway_gui as cg
 def ventana():
     bienvenida = "Bienvenido al programa principal de juegos"
     despedida = "gracias por usar este programa"
@@ -19,6 +19,13 @@ def ventana():
             respuestas = multenterbox("Ingrese los parámetros iniciales:", texto, parametros_defecto)
             if respuestas is None:
                 msgbox(despedida)
+            else:
+                filas = int(respuestas[0])
+                columnas = int(respuestas[1])
+                tam = int(respuestas[2])
+                reglas_b = [int(x) for x in respuestas[3]]
+                reglas_s = [int(x) for x in respuestas[4]]
+                conway_gui.main(filas, columnas, tam, reglas_b, reglas_s)
         elif programa == "Hormiga de Langton":
             msgbox("langton")
         else:
