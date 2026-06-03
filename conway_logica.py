@@ -36,7 +36,6 @@ def obtener_vecinos(M, f, c):
 
     return vecinos
 
-
 def transicion_celula(estado, vecinos, reglas_b, reglas_s):
     """Retorna el nuevo estado de la célula de acuerdo
     al estado de sus vecinos.
@@ -48,16 +47,18 @@ def transicion_celula(estado, vecinos, reglas_b, reglas_s):
     Salidas: 0 o 1
     Restrincciones:Estado debe ser binario, vecinos debe ser una lista al igual que las reglas dadas."""
     vecinos_vivos = sum(vecinos)
+    sumatoria = vecinos.count(1)
 
     if estado == 0:
-        if vecinos_vivos in reglas_b:
+        if sumatoria in reglas_b:
             return 1
-    else:
-        if vecinos_vivos in reglas_s:
+        return 0
+
+    if estado == 1:
+        if sumatoria in reglas_s:
             return 1
-        else:
-            return 0
-    return estado
+        return 0
+
 
 def transicion(M, reglas_b, reglas_s):
     """Toma a la matriz completa y le aplica la función de
@@ -67,14 +68,17 @@ def transicion(M, reglas_b, reglas_s):
     Salidas: Crea una matriz nueva a partir de las reglas y la matriz dada
     Restrincciones:M debe ser una matriz y las reglas s y b deben ser listas.
     """
-    filas = len(M)
-    columnas = len(M[0])
-    
-    nueva_matriz = generar_matriz_vacia(filas, columnas)
-    
-    for f in range(filas):
-        for c in range(columnas):
-            estado = M[f][c]
-            vecinos = obtener_vecinos(M, f, c)
-            nueva_matriz[f][c] = transicion_celula(estado, vecinos, reglas_b, reglas_s)
-    return nueva_matriz
+    nuevaM = deepcopy(M)
+
+    for i in range(len(M)):
+        for j in range(len(M[0])):
+            vecinos = obtener_vecinos(M, i, j)
+
+            nuevaM[i][j] = transicion_celula(
+                M[i][j],
+                vecinos,
+                reglas_b,
+                reglas_s
+            )
+
+    return nuevaM
