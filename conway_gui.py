@@ -1,46 +1,12 @@
 import pygame
 import conway_logica as con
-import easygui
 import pickle
-import sys
 
  
 
-def solicitar_reglas():
-    """Solicita las reglas por consola"""
-    print("Configuración del Autómata Life-Like")
-   campos = [
-        "Cantidad de Filas:",
-        "Cantidad de Columnas:",
-        "Tamaño de las Celdas:",
-        "Regla de Nacimiento B:",
-        "Regla de Supervivencia S:"
-    ]
 
-    valores_defecto = ["50", "50", "12", "3", "23"]
-    respuestas = easygui.multenterbox("Ingrese los parámetros iniciales:", campos, valores_defecto)
-    
-    if respuestas is None:
-        sys.exit()
-
-    try:
-        filas = int(respuestas[0])
-        columnas = int(respuestas[1])
-        tam_celda = int(respuestas[2])
-  
-        b_input = input("Casos donde se producen nacimientos (dígitos de 0 a 8): ").strip()
-        s_input = input("Casos donde las células sobreviven (dígitos de 0 a 8): ").strip()
-
-        reglas_b = [int(d) for d in b_input if '0' <= d <= '8']
-        reglas_s = [int(d) for d in s_input if '0' <= d <= '8']
-        
-        return filas, columnas, tam_celda, reglas_b, reglas_s
-    except ValueError:
-        easygui.msgbox("Error: Filas, columnas y tamaño deben ser números enteros válidos.", "Error de entrada")
-        return solicitar_reglas()
 
 def main(filas, columnas, tam, reglas_b, reglas_s):
-    reglas_b, reglas_s = solicitar_reglas()
     pygame.init()
     clock = pygame.time.Clock()
     M = con.generar_matriz_aleatoria(filas, columnas)
@@ -76,7 +42,7 @@ def main(filas, columnas, tam, reglas_b, reglas_s):
                 
                 elif event.key == pygame.K_c:
                     try:
-                        with open("partida_automata.pkl", "rb") as f_archivo:
+                        with open("partida.pkl", "rb") as f_archivo:
                             datos_cargados = pickle.load(f_archivo)
                         M = datos_cargados["matriz"]
                         filas = datos_cargados["filas"]
@@ -88,13 +54,12 @@ def main(filas, columnas, tam, reglas_b, reglas_s):
                         window = pygame.display.set_mode((w, h))
                         print("Estado cargado correctamente desde el archivo.")
                     except FileNotFoundError:
-                        print("Error: No se encontró ningún archivo de guardado previo ('partida_automata.pkl').")
+                        print("Error: No se encontró ningún archivo de guardado previo ('partida.pkl').")
             if pygame.mouse.get_pressed()[0]:
                 x, y = pygame.mouse.get_pos()
                 c = x // tam
                 f = y // tam
                 if 0 <= f < filas and 0 <= c < columnas:
-                    # Con mutación inmediata: cambia la célula al siguiente estado lógico
                     M[f][c] = (M[f][c] + 1) % 2
                     
         window.fill((0, 0, 0))
@@ -109,6 +74,3 @@ def main(filas, columnas, tam, reglas_b, reglas_s):
         pygame.display.update()
         clock.tick(10)
     pygame.quit()
-
-if __name__ == "__main__":
-    main()
