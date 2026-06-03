@@ -25,10 +25,11 @@ def ventana():
                 tam = int(respuestas[2])
                 reglas_b = [int(x) for x in respuestas[3]]
                 reglas_s = [int(x) for x in respuestas[4]]
-                conway_gui.main(filas, columnas, tam, reglas_b, reglas_s)
+                cg.main(filas, columnas, tam, reglas_b, reglas_s)
         elif programa == "Hormiga de Langton":
             msgbox("langton")
         else:
             msgbox(despedida)
 ventana()
+
 
