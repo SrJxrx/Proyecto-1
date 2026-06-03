@@ -1,5 +1,5 @@
 import pygame
-import conway_logica as con
+import matrices as mat
 import pickle
 
  
@@ -9,7 +9,7 @@ import pickle
 def main(filas, columnas, tam, reglas_b, reglas_s):
     pygame.init()
     clock = pygame.time.Clock()
-    M = con.generar_matriz_aleatoria(filas, columnas)
+    M = mat.generar_matriz_aleatoria(filas, columnas)
     w, h = columnas * tam, filas * tam
     window = pygame.display.set_mode((w, h))
     loop = True
@@ -23,9 +23,9 @@ def main(filas, columnas, tam, reglas_b, reglas_s):
                 if event.key == pygame.K_SPACE:
                     pausa = not pausa
                 elif event.key == pygame.K_r:
-                    M = con.generar_matriz_aleatoria(filas, columnas)
+                    M = mat.generar_matriz_aleatoria(filas, columnas)
                 elif event.key == pygame.K_b:
-                    M = con.generar_matriz_vacia(filas, columnas)
+                    M = mat.generar_matriz_vacia(filas, columnas)
                 elif event.key == pygame.K_g:
                     datos_a_guardar = {
                         "matriz": M,
