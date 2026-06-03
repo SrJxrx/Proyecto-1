@@ -48,7 +48,6 @@ def transicion_celula(estado, vecinos, reglas_b, reglas_s):
     Restrincciones:Estado debe ser binario, vecinos debe ser una lista al igual que las reglas dadas."""
     vecinos_vivos = sum(vecinos)
     sumatoria = vecinos.count(1)
-
     if estado == 0:
         if sumatoria in reglas_b:
             return 1
@@ -73,12 +72,6 @@ def transicion(M, reglas_b, reglas_s):
     for i in range(len(M)):
         for j in range(len(M[0])):
             vecinos = obtener_vecinos(M, i, j)
-
-            nuevaM[i][j] = transicion_celula(
-                M[i][j],
-                vecinos,
-                reglas_b,
-                reglas_s
-            )
+            nuevaM[i][j] = transicion_celula(M[i][j], vecinos, reglas_b, reglas_s)
 
     return nuevaM
