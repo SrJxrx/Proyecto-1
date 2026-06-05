@@ -5,6 +5,13 @@ import pickle
 
  
 def main(filas, columnas, tam, reglas_b, reglas_s):
+    """Función principal que recibe los valores que definen la partida,
+    ademas de manejar el guardado y carga de la partida
+    también genera la ventana del juego
+    Entradas:filas, columnas, tam, reglas_b, reglas_s)
+    Salidas:
+    Restricciones:filas, columnas, tam: deben ser int positivo
+    reglas_b, reglas_s: deben ser int entre 0 y 8""" 
     pygame.init()
     clock = pygame.time.Clock()
     M = mat.generar_matriz_aleatoria(filas, columnas)
