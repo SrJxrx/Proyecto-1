@@ -25,6 +25,8 @@ def main(filas, columnas, tam, regla):
     colores = log.generar_colores(len(regla))
     tick = 100
     while loop:
+        if tick < 0:
+            tick = 3
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 loop = False
