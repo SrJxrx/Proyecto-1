@@ -35,6 +35,7 @@ def main(filas, columnas, tam, regla):
                     pausa = not pausa
                 elif event.key == pygame.K_r:
                     M = mat.generar_matriz_vacia(filas,columnas)
+                    colores = log.generar_colores(len(regla))
                     fila_hormiga = filas // 2
                     columna_hormiga = columnas // 2
                     direccion = "W"
