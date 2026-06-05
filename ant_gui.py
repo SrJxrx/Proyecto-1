@@ -38,10 +38,8 @@ def main(filas, columnas, tam, regla):
                     direccion = "W"
                 elif event.key == pygame.K_h:
                     tick+=10
-                    print(tick)
                 elif event.key == pygame.K_l:
                     tick-=10
-                    print(tick)
                 elif event.key == pygame.K_g:
                     datos = {"matriz": M,"fila_hormiga": fila_hormiga,"columna_hormiga": columna_hormiga,"direccion": direccion,"regla": regla}
                     with open("langton.pkl", "wb") as archivo:
