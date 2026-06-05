@@ -16,7 +16,7 @@ def main(filas, columnas, tam, regla):
     M = mat.generar_matriz_vacia(filas, columnas)
     fila_hormiga = filas // 2
     columna_hormiga = columnas // 2
-    direccion = "W"
+    direccion = "D"
     w = columnas * tam
     h = filas * tam
     window = pygame.display.set_mode((w, h))
@@ -44,7 +44,7 @@ def main(filas, columnas, tam, regla):
                 elif event.key == pygame.K_l:
                     tick-=10
                 elif event.key == pygame.K_g:
-                    datos = {"matriz": M,"fila_hormiga": fila_hormiga,"columna_hormiga": columna_hormiga,"direccion": direccion,"regla": regla}
+                    datos = {"matriz": M,"fila_hormiga": fila_hormiga,"columna_hormiga": columna_hormiga,"direccion": direccion,"regla": regla, "filas": filas, "columnas" : columnas, "tam": tam}
                     with open("langton.pkl", "wb") as archivo:
                         pickle.dump(datos, archivo)
                 elif event.key == pygame.K_c:
@@ -56,6 +56,15 @@ def main(filas, columnas, tam, regla):
                         columna_hormiga = datos["columna_hormiga"]
                         direccion = datos["direccion"]
                         regla = datos["regla"]
+                        filas = datos["filas"]
+                        columnas = datos["columnas"]
+                        tam = datos["tam"]
+
+                        filas = len(M)
+                        columnas = len(M[0])
+                        w = columnas * tam
+                        h = filas * tam
+                        window = pygame.display.set_mode((w, h))
                     except FileNotFoundError:
                         print("No existe archivo guardado")
         
@@ -74,4 +83,3 @@ def main(filas, columnas, tam, regla):
         clock.tick(tick)
 
     pygame.quit()
-
