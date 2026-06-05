@@ -1,3 +1,5 @@
+from random import randint
+
 def generar_matriz_aleatoria(filas, columnas):
     """Función que retorna una matriz de las dimensiones
     especificadas con valores enteros aleatorios de 0 o 1
