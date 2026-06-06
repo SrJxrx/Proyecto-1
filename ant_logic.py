@@ -66,4 +66,3 @@ def siguiente(M,fila,columna,direccion,regla):
     M[fila][columna] = (color_actual + 1) % len(regla)
     fila, columna = avanzar_hormiga(fila,columna,direccion,len(M),len(M[0]))
     return fila, columna, direccion
-

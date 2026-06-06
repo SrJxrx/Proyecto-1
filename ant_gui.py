@@ -34,7 +34,7 @@ def main(filas, columnas, tam, regla):
                 if event.key == pygame.K_SPACE:
                     pausa = not pausa
                 elif event.key == pygame.K_r:
-                    M = mat.generar_matriz_vacia(filas,columnas)
+                    M = mat.generar_matriz_multialeatoria(filas,columnas, len(regla))
                     colores = log.generar_colores(len(regla))
                     fila_hormiga = filas // 2
                     columna_hormiga = columnas // 2
@@ -67,6 +67,12 @@ def main(filas, columnas, tam, regla):
                         window = pygame.display.set_mode((w, h))
                     except FileNotFoundError:
                         print("No existe archivo guardado")
+            if pygame.mouse.get_pressed()[0]:
+                x, y = pygame.mouse.get_pos()
+                c = x // tam
+                f = y // tam
+                if 0 <= f < filas and 0 <= c < columnas:
+                    M[f][c] = (M[f][c] + 1) % len(regla)
         
         if not pausa:
             fila_hormiga, columna_hormiga, direccion = \
